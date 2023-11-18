@@ -1,4 +1,6 @@
-﻿Public Class Form1
+﻿Imports System.Reflection.Emit
+
+Public Class Form1
 
     Dim firstNum, secondNum, ans As Double
     Dim op As String
@@ -8,11 +10,7 @@
 
         Dim b As Button = sender
 
-
-
         If TextBox1.Text = "0" Then
-
-            TextBox1.Text = ""
             TextBox1.Text = b.Text
         ElseIf b.Text = "." Then
             If Not TextBox1.Text.Contains(".") Then
@@ -20,6 +18,16 @@
             End If
         Else
             TextBox1.Text += b.Text
+        End If
+
+        If TextBox1.Text.Contains("Zero") Then
+            TextBox1.Clear()
+            Label1.Text = ""
+            TextBox1.Text += b.Text
+            firstNum = False
+            secondNum = False
+            op = False
+            ans = False
         End If
 
     End Sub
@@ -99,7 +107,6 @@
                 TextBox1.Text = ans
                 Label1.Text = firstNum.ToString() + " / " + secondNum.ToString()
                 If firstNum = "0" Or secondNum = "0" Then
-                    Label1.Text = ""
                     TextBox1.Text = "Cannot be divide by Zero"
                 End If
         End Select
@@ -119,7 +126,6 @@
             If (TextBox1.Text = "0") Then
                 Return
             End If
-
             TextBox1.Text = "-" + TextBox1.Text
         End If
 
