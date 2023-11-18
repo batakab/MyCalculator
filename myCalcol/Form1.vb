@@ -20,7 +20,7 @@ Public Class Form1
             TextBox1.Text += b.Text
         End If
 
-        If TextBox1.Text.Contains("Zero") Then
+        If TextBox1.Text.Contains("Zero") or TextBox1.Text.Contains("is") Then
             TextBox1.Clear()
             Label1.Text = ""
             TextBox1.Text += b.Text
@@ -108,6 +108,9 @@ Public Class Form1
                 Label1.Text = firstNum.ToString() + " / " + secondNum.ToString()
                 If firstNum = "0" Or secondNum = "0" Then
                     TextBox1.Text = "Cannot be divide by Zero"
+                End if 
+                If firstNum = "0" And secondNum = "0" Then
+                    TextBox1.Text = "Result is undefined"
                 End If
         End Select
 
