@@ -1,4 +1,4 @@
-﻿Imports System.Reflection.Emit
+Imports System.Reflection.Emit
 
 Public Class Form1
 
@@ -88,6 +88,10 @@ Public Class Form1
 
         Dim ops As Button = sender
 
+        If TextBox1.Text = "." Then
+            Return
+        End If
+
         If (Not String.IsNullOrEmpty(Label1.Text)) And (String.IsNullOrEmpty(TextBox1.Text)) Then
             op = ops.Text
             Label1.Text = Label1.Text.Substring(0, Label1.Text.Length - 1) + op
@@ -103,7 +107,6 @@ Public Class Form1
         TextBox1.Text = ""
         op = ops.Text
         Label1.Text = Label1.Text + " " + op
-
     End Sub
 
     Private Sub Button20_Click() Handles Button20.Click
@@ -111,6 +114,10 @@ Public Class Form1
         If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
             ResetCalcualtor()
             EnableCalculator()
+        End If
+
+        If TextBox1.Text = "." Then
+            Return
         End If
 
         If TextBox1.Text = "" Then
@@ -123,27 +130,27 @@ Public Class Form1
             Case "+"
                 ans = firstNum + secondNum
                 TextBox1.Text = ans
-                Label1.Text = firstNum.ToString() + " + " + secondNum.ToString() + " = " + ans.ToString()
+                Label1.Text = firstNum.ToString + " + " + secondNum.ToString + " = " + ans.ToString
             Case "-"
                 ans = firstNum - secondNum
                 TextBox1.Text = ans
-                Label1.Text = firstNum.ToString() + " - " + secondNum.ToString() + " = " + ans.ToString()
+                Label1.Text = firstNum.ToString + " - " + secondNum.ToString + " = " + ans.ToString
             Case "*"
                 ans = firstNum * secondNum
                 TextBox1.Text = ans
-                Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + ans.ToString()
-                If (TextBox1.Text = "-0") Then
+                Label1.Text = firstNum.ToString + " * " + secondNum.ToString + " = " + ans.ToString
+                If TextBox1.Text = "-0" Then
                     TextBox1.Text = "0"
-                    Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + "0"
+                    Label1.Text = firstNum.ToString + " * " + secondNum.ToString + " = " + "0"
                 End If
                 If ans = "-0" Then
                     ans = "0"
-                    Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + "0"
+                    Label1.Text = firstNum.ToString + " * " + secondNum.ToString + " = " + "0"
                 End If
             Case "/"
                 ans = firstNum / secondNum
                 TextBox1.Text = ans
-                Label1.Text = firstNum.ToString() + " / " + secondNum.ToString() + " = " + ans.ToString()
+                Label1.Text = firstNum.ToString + " / " + secondNum.ToString + " = " + ans.ToString
                 If firstNum = "0" Or secondNum = "0" Then
                     TextBox1.Text = "Cannot be divide by Zero"
                     Label1.Text = ""
