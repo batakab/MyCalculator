@@ -1,43 +1,38 @@
-Imports System.Reflection.Emit
+﻿Imports System.Reflection.Emit
 
 Public Class Form1
 
     Dim firstNum, secondNum, ans As Double
     Dim op As String
 
+    Private Sub ResetCalcualtor()
+        TextBox1.Clear()
+        Label1.Text = ""
+        firstNum = False
+        secondNum = False
+        op = False
+        ans = False
+    End Sub
+
+    Private Sub EnableCalculator()
+        For Each button As Button In {Button4, Button8, Button12, Button16, Button16, Button17, Button19}
+            button.Enabled = True
+        Next
+    End Sub
+
+    Private Sub DisableCalculator()
+        For Each button As Button In {Button4, Button8, Button12, Button16, Button16, Button17, Button19}
+            button.Enabled = False
+        Next
+    End Sub
 
     Private Sub Numbers_Click(sender As Object, e As EventArgs) Handles Button5.Click, Button6.Click, Button7.Click, Button9.Click, Button10.Click, Button11.Click, Button13.Click, Button14.Click, Button15.Click, Button18.Click, Button19.Click
 
         Dim b As Button = sender
 
-        If Label1.Text.Contains("=") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
-        End If
-
-        If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
+        If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Or Label1.Text.Contains("=") Then
+            ResetCalcualtor()
+            EnableCalculator()
         End If
 
         If TextBox1.Text = "0" Then
@@ -53,19 +48,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
+            ResetCalcualtor()
+            EnableCalculator()
         End If
         TextBox1.Clear()
     End Sub
@@ -76,44 +62,19 @@ Public Class Form1
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
+            ResetCalcualtor()
+            EnableCalculator()
         End If
 
-        TextBox1.Clear()
-        Label1.Text = ""
-        firstNum = False
-        secondNum = False
-        op = False
-        ans = False
+        ResetCalcualtor()
 
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
+            ResetCalcualtor()
+            EnableCalculator()
         End If
 
         If TextBox1.Text.Length > 0 Then
@@ -148,18 +109,8 @@ Public Class Form1
     Private Sub Button20_Click() Handles Button20.Click
 
         If TextBox1.Text.Contains("is") Or TextBox1.Text.Contains("by") Then
-            TextBox1.Clear()
-            Label1.Text = ""
-            firstNum = False
-            secondNum = False
-            op = False
-            ans = False
-            Button4.Enabled = True
-            Button8.Enabled = True
-            Button12.Enabled = True
-            Button16.Enabled = True
-            Button17.Enabled = True
-            Button19.Enabled = True
+            ResetCalcualtor()
+            EnableCalculator()
         End If
 
         If TextBox1.Text = "" Then
@@ -180,29 +131,31 @@ Public Class Form1
             Case "*"
                 ans = firstNum * secondNum
                 TextBox1.Text = ans
+                Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + ans.ToString()
                 If (TextBox1.Text = "-0") Then
                     TextBox1.Text = "0"
+                    Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + "0"
                 End If
-                Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + ans.ToString()
+                If ans = "-0" Then
+                    ans = "0"
+                    Label1.Text = firstNum.ToString() + " * " + secondNum.ToString() + " = " + "0"
+                End If
             Case "/"
                 ans = firstNum / secondNum
                 TextBox1.Text = ans
                 Label1.Text = firstNum.ToString() + " / " + secondNum.ToString() + " = " + ans.ToString()
                 If firstNum = "0" Or secondNum = "0" Then
                     TextBox1.Text = "Cannot be divide by Zero"
+                    Label1.Text = ""
                 End If
                 If firstNum = "0" And secondNum = "0" Then
                     TextBox1.Text = "Result is undefined"
+                    Label1.Text = ""
                 End If
         End Select
 
         If TextBox1.Text.Contains("by") Or TextBox1.Text.Contains("is") Then
-            Button4.Enabled = False
-            Button8.Enabled = False
-            Button12.Enabled = False
-            Button16.Enabled = False
-            Button17.Enabled = False
-            Button19.Enabled = False
+            DisableCalculator()
         End If
 
     End Sub
